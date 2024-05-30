@@ -4,25 +4,64 @@ let nextId = JSON.parse(localStorage.getItem("nextId")) ||0;
 
 
 // Const variables for IDs
-const taskForm = $("title");
+const taskForm = $("#taskForm");
+const inputTitle = $("#formTitle");
+const inputDueDate = $("#formDate");
+const inputDescription = $("#formDescription");
 
-
-// function to generate a unique task id
+// Function to generate a unique task id
 function generateTaskId() {
 nextId++
 localStorage.setItem("nextId", nextId)
 return nextId
 }
 
-// Todo: create a function to create a task card
+// Function to create a task card
 function createTaskCard(task) {
     const card =  $("<div>").addClass("card draggable").attr("id", task.id);
     const cardBody = $("<div>").addClass("card-body");
-    const cardTitle = $("<h5>").addClass("card-title").text(task.title);
-    const cardText = $("<p>").addClass("card-text").text(task.description);
-    const cardDueDate = $("<p>").addClass("card-text").text('Due Date: ' + task.dueDate);
+    const cardTitle = $("<h5>").addClass("card-title").text(title);
+    const cardText = $("<p>").addClass("card-text").text(description);
+    const cardDueDate = $("<p>").addClass("card-text").text('Due Date: ' + date);
     const deleteButton = $("<button>").addClass("btn btn-danger").text("Delete");
     deleteButton.click(handleDeleteTask);
+
+    // Condition to check if task has due date 
+    if (task.dueDate && task.status !== "done") {
+        let taskDueDate = dayjs(task.dueDate, "YYYY-MM-DD");
+        let currentDate = dayjs();
+
+        // Else if statement to change color depending on the day and when it's due
+        if (taskDueDate.isBefore(currentDate, "day")) {
+            card.addClass("bg-danger text-white");
+        } else if (taskDueDate.isSame(currentDate, "day")) {
+            card.addClass("bg-warning text-white");
+        } else if (taskDueDate.isAfter(currentDate, "day")) {
+            card.addClass("bg-light text-dark");
+        }
+    }
+    // Append elements and cardbody to card
+    cardBody.append(cardTitle, cardText, cardDueDate, deleteButton);
+    card.append(cardBody);
+
+    return card;
+}
+
+
+ // Condition to check if task has due date 
+ if (task.dueDate && task.status !== "done") {
+    let taskDueDate = dayjs(task.dueDate, "YYYY-MM-DD");
+    let currentDate = dayjs();
+
+
+    // Else if statement to change color depending on the day and when it's due
+    if (taskDueDate.isBefore(currentDate, "day")) {
+        card.addClass("bg-danger text-white");
+    } else if (taskDueDate.isSame(currentDate, "day")) {
+        card.addClass("bg-warning text-white");
+    } else if (taskDueDate.isAfter(currentDate, "day")) {
+        card.addClass("bg-light text-dark");
+    }
 
 }
 
