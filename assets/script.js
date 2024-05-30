@@ -72,16 +72,15 @@ $(".draggable").draggable({
     zIndex: 100,
 });
 
-
 }
 
-
 // function to handle adding a new task maybe an alert if left blank? 
-// function to handle adding a new task //
+// Function to handle adding a new task //
 function handleAddTask(event){
-    console.log("Hi")
-    let date= $("#date-name").val()
+    event.preventDefault();
+   
     let title= $("#title-name").val()
+    let date= $("#date-name").val()
     let description= $("#description").val()
 
     let card={id:generateTaskId(),date,title,description,status:"to-do"}
@@ -91,16 +90,61 @@ function handleAddTask(event){
     $("#title-name").val("")
     $("#description").val("")
     renderTaskList()
+
+// Alert if left blank
+     if (!title || !date || !description) {
+        alert("Please fill out all fields.");
+        return;
+    }
+
+    const newTask = {
+        id: generateTaskId(),
+        title: title,
+        dueDate: dueDate,
+        description: description,
+        status: "to-do"
+    };
+
+    taskList.push(newTask);
+    localStorage.setItem("tasks", JSON.stringify(taskList)); 
+
+    renderTaskList();
+
+       // Clear input
+       inputTitle.val("");
+       inputDueDate.val("");
+       inputDescription.val("");
+   
+       // Close form
+       $("#formModal").modal("hide");
+
 }
 
 // Todo: create a function to handle deleting a task
-function handleDeleteTask(event){
+
+// Function to handle deleting a task
+function handleDeleteTask(event) {
+    event.preventDefault();
+    const taskId = $(event.currentTarget).closest('.card').attr("id");
+    taskList = taskList.filter(task => task.id !== parseInt(taskId));
+    localStorage.setItem("tasks", JSON.stringify(taskList));
+    renderTaskList();
 
 }
 
-// Todo: create a function to handle dropping a task into a new status lane
+// Event listener for adding a new task
 function handleDrop(event, ui) {
+    const taskId = ui.helper.attr("id");
+    const laneId = $(event.target).attr("id");
 
+// Find task and update from card
+   const task = taskList.find(task => task.id === parseInt(taskId));
+   task.status = laneId;
+
+
+   localStorage.setItem("tasks", JSON.stringify(taskList));
+   renderTaskList();
+   
 }
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
