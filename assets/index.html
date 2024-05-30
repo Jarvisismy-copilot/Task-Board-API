@@ -25,32 +25,42 @@
       <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
     </div>
 
-    <!-- Todo: Create a modal with a form to add tasks -->
-    
-    <!--  Added HTML, CSS, JS  -->
-fefvefeefewfe
 
-    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Todo: Create a modal with a form to add tasks -->
+    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModal" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
+
+  <!-- Header -->
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+            <h1 class="modal-title" id="exampleModalLabel">New message</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+
+  <!--  Body  -->
           <div class="modal-body">
-            <form>
-              <div class="mb-3">
+            <form id="taskForm">
+              <div class="row">
+
+  <!--  Task Date   -->
+          <div class="mb-3">
                 <label for="date" class="col-form-label">Date</label>
                 <input type="date" class="form-control" id="date-name">
               </div>
+
+  <!--  Task Title   -->
               <div class="mb-3">
                 <label for="title" class="col-form-label">Title:</label>
                 <input type="text" class="form-control" id="title-name">
               </div>
+
+                  <!--  Task Description   -->
               <div class="mb-3">
                 <label for="description" class="col-form-label">Description:</label>
                 <textarea class="form-control" id="description"></textarea>
               </div>
+
+
             </form>
           </div>
           <div class="modal-footer">
