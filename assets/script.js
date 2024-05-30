@@ -2,6 +2,11 @@
 let taskList = JSON.parse(localStorage.getItem("tasks")) ||[];
 let nextId = JSON.parse(localStorage.getItem("nextId")) ||0;
 
+
+// Const variables for IDs
+const taskForm = $("title");
+
+
 // function to generate a unique task id
 function generateTaskId() {
 nextId++
