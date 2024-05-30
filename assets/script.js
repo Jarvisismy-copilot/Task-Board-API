@@ -47,20 +47,35 @@ function createTaskCard(task) {
     return card;
 }
 
-
-
 // Function to render the task list and make cards draggable
 function renderTaskList() {
 
 // Clear out any existing cards (User Friendly)
 $(".lane .card").remove();
 
+// Loops through each task and appends task card based on status
+for (const task of taskList) {
+    const taskCard = createTaskCard(task);
 
+    if (task.status === "to-do") {
+        $("#todo-cards").append(taskCard);
+    } else if (task.status === "in-progress") {
+        $("#in-progress-cards").append(taskCard);
+    } else if (task.status === "done") {
+        $("#done-cards").append(taskCard);
+    }
+}
+
+// Cards draggable
+$(".draggable").draggable({
+    opacity: 0.7,
+    zIndex: 100,
+});
 
 
 }
 
-// function to handle adding a Add consts from id tags + inputs? ? //
+
 // function to handle adding a new task maybe an alert if left blank? 
 // function to handle adding a new task //
 function handleAddTask(event){
