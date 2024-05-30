@@ -12,6 +12,7 @@ function createTaskCard(task) {
 
 }
 
+// Next Up // add rendering + dragable.... //
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
 
