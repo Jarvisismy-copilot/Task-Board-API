@@ -26,81 +26,60 @@
     </div>
 
 
- <!--   Modal with a form to add tasks -->
+   <!--   Modal with a form to add tasks -->
     <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="formModalLabel">Add Task</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form id="taskForm" class="p-3">
-              <div class="row">
-                <div class="col-6">
-                  <label for="taskTitle" class="form-label">Task Title</label>
-                  <input autocomplete="off" type="text" class="form-control mb-3" id="taskTitle" />
-                </div>
-                <div class="col-6">
-                  <label for="taskDueDate" class="form-label">Task Due Date</label>
-                  <input  type="text" class="form-control mb-3" id="taskDueDate" />
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <label for="taskDescription" class="form-label">Task Description</label>
-                  <textarea class="form-control mb-5" id="taskDescription" rows="3"></textarea>
-                </div>
-              </div>
-              <div class="text-center">
-                <button type="submit" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add
-                  Task</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-
- <!--   Todo: Create a modal with a form to add tasks -->
-    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModal" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
 
   <!-- Header -->
           <div class="modal-header">
-            <h1 class="modal-title" id="exampleModalLabel">New message</h1>
+            <h1 class="modal-title fs-5" id="formModalLabel">Add Task</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
-        <!--  Body  -->
+  <!--  Body  -->
           <div class="modal-body">
-            <form id="taskForm">
+            <form id="title" class="p-3">
+              <div class="row">
+                <div class="col-6">
+                  <label for="taskTitle" class="form-label">Task Title</label>
+                  <input autocomplete="off" type="text" class="form-control mb-3" id="title-name" />
+                </div>
+
+  <!-- Task Date  -->
+                <div class="col-6">
+                  <label for="date" class="form-label">Task Due Date</label>
+                  <input  type="text" class="form-control mb-3" id="date-name" />
+                </div>
+              </div>
               <div class="row">
 
-        <!-- Task Date  -->
-          <div class="mb-3">
-                <label for="date" class="col-form-label">Date</label>
-                <input type="date" class="form-control" id="date-name">
+  <!--  Task Description   -->  
+                <div class="col-12">
+                  <label for="description" class="form-label">Task Description</label>
+                  <textarea class="form-control mb-5" id="description" rows="3"></textarea>
+                </div>
               </div>
-          
-        <!-- Task Title -->
-              <div class="mb-3">
-                <label for="title" class="col-form-label">Title:</label>
-                <input type="text" class="form-control" id="title-name">
-              </div>
-<!-- add autocomplete off and maybe minimunm start date (can't be passed due) etc. -->
 
+  <!--  Add Second Submit Task Button -->
+              <div class="text-center">
+          <button type="submit" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add
+              Task</button>
+         </div>
+      </form>
+
+             
+  
   <!--  Task Description   -->
               <div class="mb-3">
                 <label for="description" class="col-form-label">Description:</label>
                 <textarea class="form-control" id="description" rows="3"></textarea>
               </div>
-            </form>
-          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
 
   <!--  Add Second Submit Task Button -->
         <div class="modal-footer">
