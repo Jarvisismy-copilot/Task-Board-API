@@ -48,30 +48,21 @@ function createTaskCard(task) {
 }
 
 
- // Condition to check if task has due date 
- if (task.dueDate && task.status !== "done") {
-    let taskDueDate = dayjs(task.dueDate, "YYYY-MM-DD");
-    let currentDate = dayjs();
 
-
-    // Else if statement to change color depending on the day and when it's due
-    if (taskDueDate.isBefore(currentDate, "day")) {
-        card.addClass("bg-danger text-white");
-    } else if (taskDueDate.isSame(currentDate, "day")) {
-        card.addClass("bg-warning text-white");
-    } else if (taskDueDate.isAfter(currentDate, "day")) {
-        card.addClass("bg-light text-dark");
-    }
-
-}
-
-// Next Up // add rendering + dragable.... //
-// Todo: create a function to render the task list and make cards draggable
+// Function to render the task list and make cards draggable
 function renderTaskList() {
 
+// Clear out any existing cards (User Friendly)
+$(".lane .card").remove();
+
+
+
+
 }
 
-        // function to handle adding a new task //
+// function to handle adding a Add consts from id tags + inputs? ? //
+// function to handle adding a new task maybe an alert if left blank? 
+// function to handle adding a new task //
 function handleAddTask(event){
     console.log("Hi")
     let date= $("#date-name").val()
