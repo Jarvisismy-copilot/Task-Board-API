@@ -37,43 +37,46 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
-  <!--  Body  -->
+        <!--  Body  -->
           <div class="modal-body">
             <form id="taskForm">
               <div class="row">
 
-  <!--  Task Date   -->
+        <!-- Task Date  -->
           <div class="mb-3">
                 <label for="date" class="col-form-label">Date</label>
                 <input type="date" class="form-control" id="date-name">
               </div>
 
-  <!--  Task Title   -->
+          
+        <!-- Task Title -->
               <div class="mb-3">
                 <label for="title" class="col-form-label">Title:</label>
                 <input type="text" class="form-control" id="title-name">
               </div>
+<!-- add autocomplete off and maybe minimunm start date (can't be passed due) etc. -->
 
-                  <!--  Task Description   -->
+  <!--  Task Description   -->
               <div class="mb-3">
                 <label for="description" class="col-form-label">Description:</label>
-                <textarea class="form-control" id="description"></textarea>
+                <textarea class="form-control" id="description" rows="3"></textarea>
               </div>
-
-
             </form>
           </div>
-          <div class="modal-footer">
-      
-      <button id="secondSubmit" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
 
-          </div>
+  <!--  Add Second Submit Task Button -->
+        <div class="modal-footer">
+         <button id="secondSubmit" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
         </div>
       </div>
     </div>
+  </div>
 
 
-
+  
+  <!-- Starter Code -->
+  <!--  Need to EDIT  -->
+   <!--  Need to EDIT  -->
     <div class="row swim-lanes text-center justify-content-between">
       <div class="col-12 col-lg-4 d-flex">
         <div id="to-do" class="card border-light mb-3 lane flex-grow-1">
