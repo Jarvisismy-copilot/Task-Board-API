@@ -141,20 +141,23 @@ function handleDrop(event, ui) {
    const task = taskList.find(task => task.id === parseInt(taskId));
    task.status = laneId;
 
-
    localStorage.setItem("tasks", JSON.stringify(taskList));
    renderTaskList();
-   
+
 }
 
-// Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
+// When the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
+    renderTaskList();
+    $("#formDate").datepicker({
+        dateFormat: "yy-mm-dd"
+    });
 
-$("#secondSubmit").on("click", function(){
-    handleAddTask()
-
-})
+// Lanes droppable for cards
+            $(".lane").droppable({
+        accept: ".draggable",
+        drop: handleDrop    
+    })
 
 });
-
 
