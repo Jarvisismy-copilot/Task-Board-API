@@ -1,9 +1,9 @@
+
 // Retrieve tasks and nextId from localStorage
-let taskList = JSON.parse(localStorage.getItem("tasks")) ||[];
-let nextId = JSON.parse(localStorage.getItem("nextId")) ||0;
+let taskList = JSON.parse(localStorage.getItem("tasks")) || [];
+let nextId = parseInt(localStorage.getItem("nextId")) || 1;
 
-
-// Const variables for IDs
+// Created const variables for IDs
 const taskForm = $("#taskForm");
 const inputTitle = $("#formTitle");
 const inputDueDate = $("#formDate");
@@ -11,20 +11,21 @@ const inputDescription = $("#formDescription");
 
 // Function to generate a unique task id
 function generateTaskId() {
-nextId++
-localStorage.setItem("nextId", nextId)
-return nextId
+    const id = nextId++;
+    localStorage.setItem("nextId", JSON.stringify(nextId));
+    return id;
 }
 
 // Function to create a task card
 function createTaskCard(task) {
-    const card =  $("<div>").addClass("card draggable").attr("id", task.id);
+    const card = $("<div>").addClass("card draggable").attr("id", task.id);
     const cardBody = $("<div>").addClass("card-body");
     const cardTitle = $("<h5>").addClass("card-title").text(task.title);
     const cardText = $("<p>").addClass("card-text").text(task.description);
     const cardDueDate = $("<p>").addClass("card-text").text('Due Date: ' + task.dueDate);
     const deleteButton = $("<button>").addClass("btn btn-danger").text("Delete");
     deleteButton.click(handleDeleteTask);
+
 
     // Condition to check if task has due date 
     if (task.dueDate && task.status !== "done") {
@@ -50,49 +51,42 @@ function createTaskCard(task) {
 // Function to render the task list and make cards draggable
 function renderTaskList() {
 
-// Clear out any existing cards (User Friendly)
-$(".lane .card").remove();
+    // Clear out any existing cards
+    $(".lane .card").remove();
 
-// Loops through each task and appends task card based on status
-for (const task of taskList) {
-    const taskCard = createTaskCard(task);
+    // Loops through each task and appends task card based on status
+    for (const task of taskList) {
+        const taskCard = createTaskCard(task);
 
-    if (task.status === "to-do") {
-        $("#todo-cards").append(taskCard);
-    } else if (task.status === "in-progress") {
-        $("#in-progress-cards").append(taskCard);
-    } else if (task.status === "done") {
-        $("#done-cards").append(taskCard);
+        if (task.status === "to-do") {
+            $("#todo-cards").append(taskCard);
+        } else if (task.status === "in-progress") {
+            $("#in-progress-cards").append(taskCard);
+        } else if (task.status === "done") {
+            $("#done-cards").append(taskCard);
+        }
     }
+
+    // Cards draggable
+    $(".draggable").draggable({
+        opacity: 0.7,
+        zIndex: 100,
+    });
+
+
 }
 
-// Cards draggable
-$(".draggable").draggable({
-    opacity: 0.7,
-    zIndex: 100,
-});
 
-}
-
-// function to handle adding a new task maybe an alert if left blank? 
-// Function to handle adding a new task //
-function handleAddTask(event){
+// Function to handle adding a new task
+function handleAddTask(event) {
     event.preventDefault();
-   
-    let title= $("#title-name").val()
-    let date= $("#date-name").val()
-    let description= $("#description").val()
 
-    let card={id:generateTaskId(),date,title,description,status:"to-do"}
-    taskList.push(card)
-    localStorage.setItem("tasks",JSON.stringify(card))
-    $("#date-name").val("")
-    $("#title-name").val("")
-    $("#description").val("")
-    renderTaskList()
+    const title = inputTitle.val().trim();
+    const dueDate = inputDueDate.val().trim();
+    const description = inputDescription.val().trim();
 
-// Alert if left blank
-     if (!title || !date || !description) {
+    // Alert if left blank
+    if (!title || !dueDate || !description) {
         alert("Please fill out all fields.");
         return;
     }
@@ -110,17 +104,15 @@ function handleAddTask(event){
 
     renderTaskList();
 
-       // Clear input
-       inputTitle.val("");
-       inputDueDate.val("");
-       inputDescription.val("");
-   
-       // Close form
-       $("#formModal").modal("hide");
+    // Clear input
+    inputTitle.val("");
+    inputDueDate.val("");
+    inputDescription.val("");
 
+    // Close form
+    $("#formModal").modal("hide");
 }
 
-// Todo: create a function to handle deleting a task
 
 // Function to handle deleting a task
 function handleDeleteTask(event) {
@@ -129,35 +121,38 @@ function handleDeleteTask(event) {
     taskList = taskList.filter(task => task.id !== parseInt(taskId));
     localStorage.setItem("tasks", JSON.stringify(taskList));
     renderTaskList();
-
 }
 
 // Event listener for adding a new task
+$("#addTaskButton").click(handleAddTask);
+
+
+// Function to handle dropping a task card into a lane
 function handleDrop(event, ui) {
     const taskId = ui.helper.attr("id");
     const laneId = $(event.target).attr("id");
 
-// Find task and update from card
-   const task = taskList.find(task => task.id === parseInt(taskId));
-   task.status = laneId;
+    // Find task and update from card
+    const task = taskList.find(task => task.id === parseInt(taskId));
+    task.status = laneId;
 
-   localStorage.setItem("tasks", JSON.stringify(taskList));
-   renderTaskList();
 
+    localStorage.setItem("tasks", JSON.stringify(taskList));
+    renderTaskList();
+    
 }
 
-// When the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
+// When the page loads, render the task list and set up event listeners
 $(document).ready(function () {
     renderTaskList();
-    $("#formDate").datepicker({
-        dateFormat: "yy-mm-dd"
-    });
+        $("#formDate").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
 
-// Lanes droppable for cards
-            $(".lane").droppable({
+        // Lanes droppable for cards
+    $(".lane").droppable({
         accept: ".draggable",
-        drop: handleDrop    
+        drop: handleDrop
     })
 
 });
-
