@@ -5,9 +5,9 @@ let nextId = parseInt(localStorage.getItem("nextId")) || 1;
 
 // Created const variables for IDs
 const taskForm = $("#taskForm");
-const inputTitle = $("#formTitle");
-const inputDueDate = $("#formDate");
-const inputDescription = $("#formDescription");
+const inputTitle = $("#taskTitle");
+const inputDueDate = $("#taskDueDate");
+const inputDescription = $("#taskDescription");
 
 // Function to generate a unique task id
 function generateTaskId() {
