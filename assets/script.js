@@ -52,7 +52,7 @@ function createTaskCard(task) {
 function renderTaskList() {
 
     // Clear out any existing cards
-    $(".lane .card").remove();
+   $(".lane .card").remove();
 
     // Loops through each task and appends task card based on status
     for (const task of taskList) {
@@ -145,7 +145,7 @@ function handleDrop(event, ui) {
 // When the page loads, render the task list and set up event listeners
 $(document).ready(function () {
     renderTaskList();
-        $("#formDate").datepicker({
+        $("#taskDueDate").datepicker({
             dateFormat: "yy-mm-dd"
         });
 
@@ -154,5 +154,7 @@ $(document).ready(function () {
         accept: ".draggable",
         drop: handleDrop
     })
+$("#taskForm").on("submit", handleAddTask)
+
 
 });
